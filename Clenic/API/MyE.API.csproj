@@ -9,9 +9,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.OpenApi" Version="1.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.1" />
+    <PackageReference Include="Swashbuckle.Core" Version="5.6.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Business.MainModule\Business.MainModule.csproj" />
     <ProjectReference Include="..\DistributedServices.DTO\DistributedServices.DTO.csproj" />
     <ProjectReference Include="..\Domain.Entities\Domain.Entities.csproj" />
   </ItemGroup>

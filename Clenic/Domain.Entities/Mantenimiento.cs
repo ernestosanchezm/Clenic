@@ -14,10 +14,11 @@ namespace Domain.Entities
 
         public int IdMantenimiento { get; set; }
         public int IdSolicitud { get; set; }
-        public int IdIngeniero { get; set; }
         public DateTime Dfecha { get; set; }
         public int QestadoMantenimiento { get; set; }
         public int QestadoIngeniero { get; set; }
+        public int IdIngeniero { get; set; }
+        public string Testado { get; set; }
 
         public virtual Ingeniero IdIngenieroNavigation { get; set; }
         public virtual Solicitud IdSolicitudNavigation { get; set; }

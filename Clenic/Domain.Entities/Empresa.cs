@@ -19,7 +19,7 @@ namespace Domain.Entities
         public string Tadministrador { get; set; }
         public string Tdireccion { get; set; }
 
-        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario IdEmpresaNavigation { get; set; }
         public virtual ICollection<Ingeniero> Ingenieros { get; set; }
         public virtual ICollection<Solicitud> Solicituds { get; set; }
     }

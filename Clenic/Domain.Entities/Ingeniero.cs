@@ -13,13 +13,14 @@ namespace Domain.Entities
         }
 
         public int IdIngeniero { get; set; }
-        public int IdEmpresa { get; set; }
         public string Tnombre { get; set; }
         public string Tdni { get; set; }
         public string Tdireccion { get; set; }
+        public int IdEmpresa { get; set; }
+        public string Testado { get; set; }
 
         public virtual Empresa IdEmpresaNavigation { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario IdIngenieroNavigation { get; set; }
         public virtual ICollection<Mantenimiento> Mantenimientos { get; set; }
     }
 }

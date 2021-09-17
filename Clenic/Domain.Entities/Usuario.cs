@@ -10,9 +10,10 @@ namespace Domain.Entities
         public int IdUsuario { get; set; }
         public string Tusername { get; set; }
         public string Tpassword { get; set; }
+        public int TtipoUsuario { get; set; }
 
-        public virtual Ingeniero IdUsuario1 { get; set; }
-        public virtual Sanatorio IdUsuario2 { get; set; }
-        public virtual Empresa IdUsuarioNavigation { get; set; }
+        public virtual Empresa Empresa { get; set; }
+        public virtual Ingeniero Ingeniero { get; set; }
+        public virtual Sanatorio Sanatorio { get; set; }
     }
 }

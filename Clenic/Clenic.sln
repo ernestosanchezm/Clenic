@@ -13,23 +13,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Distributed Service", "Dist
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{26B6D1CA-CE5D-495B-899D-894A96BCCFAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyE.API", "API\MyE.API.csproj", "{05E1EC26-F670-4180-9FD2-F12321C9AF9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyE.API", "API\MyE.API.csproj", "{05E1EC26-F670-4180-9FD2-F12321C9AF9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyE.Web", "MyE.Web\MyE.Web.csproj", "{ED03C83E-8C24-4217-B7E6-9FEC124754C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyE.Web", "MyE.Web\MyE.Web.csproj", "{ED03C83E-8C24-4217-B7E6-9FEC124754C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Entities", "Domain.Entities\Domain.Entities.csproj", "{7C5AE725-11F2-434B-BE23-93E4D03F5FBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Entities", "Domain.Entities\Domain.Entities.csproj", "{7C5AE725-11F2-434B-BE23-93E4D03F5FBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data", "Infraestructure.Data\Infrastructure.Data.csproj", "{C97DE1C5-24D9-4041-9A65-87CE23E9DD83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Data", "Infraestructure.Data\Infrastructure.Data.csproj", "{C97DE1C5-24D9-4041-9A65-87CE23E9DD83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistributedServices.DTO", "DistributedServices.DTO\DistributedServices.DTO.csproj", "{B65B2C5E-76E4-4E9E-8190-FA080C2D7FEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DistributedServices.DTO", "DistributedServices.DTO\DistributedServices.DTO.csproj", "{B65B2C5E-76E4-4E9E-8190-FA080C2D7FEE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{40BA7515-75FE-4CF9-9F69-3402D1FA720D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.MainModule", "Business.MainModule\Business.MainModule.csproj", "{ABD724C6-686E-4FD5-AB1B-E44AD25FE8B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.MainModule", "Business.MainModule\Business.MainModule.csproj", "{ABD724C6-686E-4FD5-AB1B-E44AD25FE8B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.DTO", "Business.DTO\Business.DTO.csproj", "{D162D08D-1204-4EAB-8D6F-FB536C1081B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.DTO", "Business.DTO\Business.DTO.csproj", "{D162D08D-1204-4EAB-8D6F-FB536C1081B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Helpers", "Business.Helpers\Business.Helpers.csproj", "{E462D364-C10E-4045-AE31-86F76C0B6881}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.Helpers", "Business.Helpers\Business.Helpers.csproj", "{E462D364-C10E-4045-AE31-86F76C0B6881}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Constants", "Business.Constants\Business.Constants.csproj", "{45A09F8B-51FF-4A8B-9D88-FAE1476C3AD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{E462D364-C10E-4045-AE31-86F76C0B6881}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E462D364-C10E-4045-AE31-86F76C0B6881}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E462D364-C10E-4045-AE31-86F76C0B6881}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45A09F8B-51FF-4A8B-9D88-FAE1476C3AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45A09F8B-51FF-4A8B-9D88-FAE1476C3AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45A09F8B-51FF-4A8B-9D88-FAE1476C3AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45A09F8B-51FF-4A8B-9D88-FAE1476C3AD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +89,7 @@ Global
 		{ABD724C6-686E-4FD5-AB1B-E44AD25FE8B3} = {40BA7515-75FE-4CF9-9F69-3402D1FA720D}
 		{D162D08D-1204-4EAB-8D6F-FB536C1081B7} = {40BA7515-75FE-4CF9-9F69-3402D1FA720D}
 		{E462D364-C10E-4045-AE31-86F76C0B6881} = {40BA7515-75FE-4CF9-9F69-3402D1FA720D}
+		{45A09F8B-51FF-4A8B-9D88-FAE1476C3AD5} = {40BA7515-75FE-4CF9-9F69-3402D1FA720D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED0A71AB-AF59-45DF-9BD1-DC18DDB5F1D0}

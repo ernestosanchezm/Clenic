@@ -68,6 +68,12 @@ namespace Infrastructure.Data
                     .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("TRUC");
+
+                entity.HasOne(d => d.IdEmpresaNavigation)
+                    .WithOne(p => p.Empresa)
+                    .HasForeignKey<Empresa>(d => d.IdEmpresa)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Empresa_Usuario");
             });
 
             modelBuilder.Entity<Ingeniero>(entity =>
@@ -89,6 +95,10 @@ namespace Infrastructure.Data
                     .HasMaxLength(100)
                     .HasColumnName("TDNI");
 
+                entity.Property(e => e.Testado)
+                    .HasMaxLength(1)
+                    .HasColumnName("TEstado");
+
                 entity.Property(e => e.Tnombre)
                     .IsRequired()
                     .HasMaxLength(100)
@@ -98,7 +108,13 @@ namespace Infrastructure.Data
                     .WithMany(p => p.Ingenieros)
                     .HasForeignKey(d => d.IdEmpresa)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Trabajador_Empresa");
+                    .HasConstraintName("Ingeniero_Empresa");
+
+                entity.HasOne(d => d.IdIngenieroNavigation)
+                    .WithOne(p => p.Ingeniero)
+                    .HasForeignKey<Ingeniero>(d => d.IdIngeniero)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Ingeniero_Usuario");
             });
 
             modelBuilder.Entity<Mantenimiento>(entity =>
@@ -108,8 +124,6 @@ namespace Infrastructure.Data
 
                 entity.ToTable("Mantenimiento");
 
-                entity.Property(e => e.IdMantenimiento).ValueGeneratedNever();
-
                 entity.Property(e => e.Dfecha)
                     .HasColumnType("date")
                     .HasColumnName("DFecha");
@@ -118,11 +132,15 @@ namespace Infrastructure.Data
 
                 entity.Property(e => e.QestadoMantenimiento).HasColumnName("QEstadoMantenimiento");
 
+                entity.Property(e => e.Testado)
+                    .HasMaxLength(1)
+                    .HasColumnName("TEstado");
+
                 entity.HasOne(d => d.IdIngenieroNavigation)
                     .WithMany(p => p.Mantenimientos)
                     .HasForeignKey(d => d.IdIngeniero)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Mantenimiento_Trabajador");
+                    .HasConstraintName("Mantenimiento_Ingeniero");
 
                 entity.HasOne(d => d.IdSolicitudNavigation)
                     .WithMany(p => p.Mantenimientos)
@@ -140,6 +158,10 @@ namespace Infrastructure.Data
 
                 entity.Property(e => e.IdMaquina).ValueGeneratedNever();
 
+                entity.Property(e => e.FincidenteDetectado).HasColumnName("FIncidenteDetectado");
+
+                entity.Property(e => e.FioTintegrado).HasColumnName("FIoTIntegrado");
+
                 entity.Property(e => e.Tmarca)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -150,10 +172,21 @@ namespace Infrastructure.Data
                     .HasMaxLength(50)
                     .HasColumnName("TModelo");
 
+                entity.Property(e => e.Tserie)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnName("TSerie");
+
                 entity.Property(e => e.Ttipo)
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("TTipo");
+
+                entity.HasOne(d => d.IdSanatorioNavigation)
+                    .WithMany(p => p.Maquinas)
+                    .HasForeignKey(d => d.IdSanatorio)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Maquina_Sanatorio");
             });
 
             modelBuilder.Entity<Reporte>(entity =>
@@ -174,6 +207,7 @@ namespace Infrastructure.Data
                 entity.Property(e => e.Tcomentarios)
                     .IsRequired()
                     .HasMaxLength(500)
+                    .IsUnicode(false)
                     .HasColumnName("TComentarios");
 
                 entity.HasOne(d => d.IdMantenimientoNavigation)
@@ -211,6 +245,12 @@ namespace Infrastructure.Data
                     .IsRequired()
                     .HasMaxLength(20)
                     .HasColumnName("TRUC");
+
+                entity.HasOne(d => d.IdSanatorioNavigation)
+                    .WithOne(p => p.Sanatorio)
+                    .HasForeignKey<Sanatorio>(d => d.IdSanatorio)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Sanatorio_Usuario");
             });
 
             modelBuilder.Entity<Solicitud>(entity =>
@@ -219,8 +259,6 @@ namespace Infrastructure.Data
                     .HasName("Solicitud_pk");
 
                 entity.ToTable("Solicitud");
-
-                entity.Property(e => e.IdSolicitud).ValueGeneratedNever();
 
                 entity.Property(e => e.Tdescripcion)
                     .IsRequired()
@@ -238,12 +276,6 @@ namespace Infrastructure.Data
                     .HasForeignKey(d => d.IdMaquina)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Solicitud_Maquina");
-
-                entity.HasOne(d => d.IdSanatorioNavigation)
-                    .WithMany(p => p.Solicituds)
-                    .HasForeignKey(d => d.IdSanatorio)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Solicitud_Sanatorio");
             });
 
             modelBuilder.Entity<Usuario>(entity =>
@@ -253,35 +285,17 @@ namespace Infrastructure.Data
 
                 entity.ToTable("Usuario");
 
-                entity.Property(e => e.IdUsuario).ValueGeneratedNever();
-
                 entity.Property(e => e.Tpassword)
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("TPassword");
 
+                entity.Property(e => e.TtipoUsuario).HasColumnName("TTipoUsuario");
+
                 entity.Property(e => e.Tusername)
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("TUsername");
-
-                entity.HasOne(d => d.IdUsuarioNavigation)
-                    .WithOne(p => p.Usuario)
-                    .HasForeignKey<Usuario>(d => d.IdUsuario)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Usuario_Empresa");
-
-                entity.HasOne(d => d.IdUsuario1)
-                    .WithOne(p => p.Usuario)
-                    .HasForeignKey<Usuario>(d => d.IdUsuario)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Usuario_Trabajador");
-
-                entity.HasOne(d => d.IdUsuario2)
-                    .WithOne(p => p.Usuario)
-                    .HasForeignKey<Usuario>(d => d.IdUsuario)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Usuario_Sanatorio");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -9,7 +9,7 @@ namespace Domain.Entities
     {
         public Sanatorio()
         {
-            Solicituds = new HashSet<Solicitud>();
+            Maquinas = new HashSet<Maquina>();
         }
 
         public int IdSanatorio { get; set; }
@@ -18,7 +18,7 @@ namespace Domain.Entities
         public string Tencargado { get; set; }
         public string Tdireccion { get; set; }
 
-        public virtual Usuario Usuario { get; set; }
-        public virtual ICollection<Solicitud> Solicituds { get; set; }
+        public virtual Usuario IdSanatorioNavigation { get; set; }
+        public virtual ICollection<Maquina> Maquinas { get; set; }
     }
 }

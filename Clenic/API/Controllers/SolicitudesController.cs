@@ -1,4 +1,6 @@
-﻿using DistributedServices.DTO;
+﻿using Business.DTO;
+using Business.MainModule;
+using DistributedServices.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,37 +15,55 @@ namespace MyE.API.Controllers
     [ApiController]
     public class SolicitudesController : ControllerBase
     {
+        SolicitudBusiness solicitudBusiness = default(SolicitudBusiness);
         // GET: api/<SolicitudesController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        public SolicitudesController()
         {
-            return new string[] { "value1", "value2" };
+            solicitudBusiness = new SolicitudBusiness();
         }
-
-        // GET api/<SolicitudesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<SolicitudesController>
         [HttpPost]
-        public void Post([FromBody] LoginRqst objLogin)
+        [Route("registrarsolicitud")]
+        public bool RegistrarSolicitud(SolicitudReg objInsert)
         {
-
+            try {
+                solicitudBusiness.RegistrarSolicitud(objInsert.IdMaquina, objInsert.Descripcion, objInsert.IdEmpresa);
+                return true;
+            } catch { 
+                return false; 
+            }
+           
         }
 
-        // PUT api/<SolicitudesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+
+        [HttpGet]        
+        [Route("listbyencargado")]
+        public List<SolicitudDTO> ListByEncargado(int idsanatorio)
         {
+            try
+            {
+                return solicitudBusiness.ListarSolicitudesPorEncargado(idsanatorio);
+            }
+            catch
+            {
+                return null;
+            }
+     
         }
 
-        // DELETE api/<SolicitudesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpGet]
+        [Route("listbyempresa")]
+        public List<SolicitudDTO> LisByEmpresa(int idempresa)
         {
+            try
+            {
+                return solicitudBusiness.ListarSolicitudesPorEmpresa(idempresa);
+            }
+            catch
+            {
+                return null;
+            }
+
+
         }
     }
 }

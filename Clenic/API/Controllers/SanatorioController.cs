@@ -13,25 +13,23 @@ namespace MyE.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class SanatorioController : ControllerBase
     {
-        UsuarioBusiness usuarioBusiness = default(UsuarioBusiness);
-               
-
+        SanatorioBusiness sanatorioBusiness = default(SanatorioBusiness);
         // GET: api/<SolicitudesController>
-        public UsuarioController()
+        public SanatorioController()
         {
-            usuarioBusiness = new UsuarioBusiness();
+            sanatorioBusiness = new SanatorioBusiness();
         }
         [HttpPost]
-        [Route("login")]
-        public object Login(LoginRqst objlogin)
+        [Route("registrarsanatorio")]
+        public bool RegistrarSanatorio(SanatorioReg objSanatorio)
         {
             try {
-                return usuarioBusiness.LoginUser(objlogin.nameuser, objlogin.psw);
+                return sanatorioBusiness.RegistrarSanatorio(objSanatorio.nameuser, objSanatorio.psw, objSanatorio.RazonSocial, objSanatorio.RUC, objSanatorio.Encargado, objSanatorio.Direccion);
               
             } catch {
-                return null;
+                return false;
             }           
         }
 

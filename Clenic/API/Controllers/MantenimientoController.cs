@@ -13,22 +13,20 @@ namespace MyE.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class MantenimientoController : ControllerBase
     {
-        UsuarioBusiness usuarioBusiness = default(UsuarioBusiness);
-               
-
+        MantenimientoBusiness mantenimientoBusiness = default(MantenimientoBusiness);
         // GET: api/<SolicitudesController>
-        public UsuarioController()
+        public MantenimientoController()
         {
-            usuarioBusiness = new UsuarioBusiness();
+            mantenimientoBusiness = new MantenimientoBusiness();
         }
         [HttpPost]
-        [Route("login")]
-        public object Login(LoginRqst objlogin)
+        [Route("cambiarestado")]
+        public object CambiarEstadoMantenimiento(CambiarMantenimiento obj)
         {
             try {
-                return usuarioBusiness.LoginUser(objlogin.nameuser, objlogin.psw);
+                return mantenimientoBusiness.CambiarEstadoMantenimiento(obj.idmantenimiento, obj.estado);
               
             } catch {
                 return null;

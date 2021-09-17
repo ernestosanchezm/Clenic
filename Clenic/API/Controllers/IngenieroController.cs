@@ -61,5 +61,19 @@ namespace MyE.API.Controllers
             }
         }
 
+
+        [HttpGet]
+        [Route("cambiarestado")]
+        public bool CambiarEstadoIngeniero(CambiarEstadoIngeniero obj)
+        {
+            try
+            {
+                return ingenieroBusiness.CambiarEstadoIngeniero(obj.idingeniero,obj.estado);
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

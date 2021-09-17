@@ -27,7 +27,7 @@ namespace API
         {
             services.AddControllers()
             .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
- 
+             
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo

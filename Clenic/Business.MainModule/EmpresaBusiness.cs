@@ -22,7 +22,7 @@ namespace Business.MainModule
             ctx.Usuarios.Add(objUsuario);
             var objempresa = new Empresa {
                 IdEmpresaNavigation=objUsuario,
-                Tadministrador=nadmin,
+                //Tadministrador=nadmin,
                 Tdireccion = direccion,
                 TrazonSocial=razonsocial,
                 Truc=ruc                

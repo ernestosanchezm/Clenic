@@ -20,7 +20,7 @@ namespace Testing
         {          
         }
         [TestMethod]
-        public void CambiarEstadoIngeniero()
+        public void TestCambiarEstadoIngeniero()
         {
             var controller = new IngenieroController();
             int idingeniero = 3; string estado = Constantes.ESTADO_INGENIERO_ACTIVO;
@@ -33,7 +33,7 @@ namespace Testing
 
         }
         [TestMethod]
-        public void DetalleIngeniero()
+        public void TestDetalleIngeniero()
         {
             var controller = new IngenieroController();
             int idingeniero = 3; 
@@ -47,7 +47,7 @@ namespace Testing
 
         }
         [TestMethod]
-        public void ListarIngenierosActivosPorEmpresa()
+        public void TestListarIngenierosActivosPorEmpresa()
         {
             var controller = new IngenieroController();
             int idEmpresa = 2;

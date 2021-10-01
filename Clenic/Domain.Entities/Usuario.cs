@@ -12,8 +12,8 @@ namespace Domain.Entities
         public string Tpassword { get; set; }
         public int TtipoUsuario { get; set; }
 
+        public virtual CentroSalud CentroSalud { get; set; }
+        public virtual Colaborador Colaborador { get; set; }
         public virtual Empresa Empresa { get; set; }
-        public virtual Ingeniero Ingeniero { get; set; }
-        public virtual Sanatorio Sanatorio { get; set; }
     }
 }

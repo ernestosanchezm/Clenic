@@ -18,12 +18,12 @@ namespace Infrastructure.Data
         {
         }
 
+        public virtual DbSet<CentroSalud> CentroSaluds { get; set; }
+        public virtual DbSet<Colaborador> Colaboradors { get; set; }
         public virtual DbSet<Empresa> Empresas { get; set; }
-        public virtual DbSet<Ingeniero> Ingenieros { get; set; }
         public virtual DbSet<Mantenimiento> Mantenimientos { get; set; }
         public virtual DbSet<Maquina> Maquinas { get; set; }
         public virtual DbSet<Reporte> Reportes { get; set; }
-        public virtual DbSet<Sanatorio> Sanatorios { get; set; }
         public virtual DbSet<Solicitud> Solicituds { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
 
@@ -40,6 +40,85 @@ namespace Infrastructure.Data
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
 
+            modelBuilder.Entity<CentroSalud>(entity =>
+            {
+                entity.HasKey(e => e.IdCentroSalud)
+                    .HasName("Sanatorio_pk");
+
+                entity.ToTable("CentroSalud");
+
+                entity.Property(e => e.IdCentroSalud).ValueGeneratedNever();
+
+                entity.Property(e => e.Tdireccion)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .HasColumnName("TDireccion");
+
+                entity.Property(e => e.Tencargado)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnName("TEncargado");
+
+                entity.Property(e => e.TrazonSocial)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnName("TRazonSocial");
+
+                entity.Property(e => e.Truc)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .HasColumnName("TRUC");
+
+                entity.HasOne(d => d.IdCentroSaludNavigation)
+                    .WithOne(p => p.CentroSalud)
+                    .HasForeignKey<CentroSalud>(d => d.IdCentroSalud)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Sanatorio_Usuario");
+            });
+
+            modelBuilder.Entity<Colaborador>(entity =>
+            {
+                entity.HasKey(e => e.IdColaborador)
+                    .HasName("Ingeniero_pk");
+
+                entity.ToTable("Colaborador");
+
+                entity.Property(e => e.IdColaborador).ValueGeneratedNever();
+
+                entity.Property(e => e.Tdireccion)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .HasColumnName("TDireccion");
+
+                entity.Property(e => e.Tdni)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnName("TDNI");
+
+                entity.Property(e => e.Testado)
+                    .HasMaxLength(1)
+                    .HasColumnName("TEstado");
+
+                entity.Property(e => e.Tnombre)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnName("TNombre");
+
+                entity.Property(e => e.TtipoColaborador).HasColumnName("TTipoColaborador");
+
+                entity.HasOne(d => d.IdColaboradorNavigation)
+                    .WithOne(p => p.Colaborador)
+                    .HasForeignKey<Colaborador>(d => d.IdColaborador)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Ingeniero_Usuario");
+
+                entity.HasOne(d => d.IdEmpresaNavigation)
+                    .WithMany(p => p.Colaboradors)
+                    .HasForeignKey(d => d.IdEmpresa)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Ingeniero_Empresa");
+            });
+
             modelBuilder.Entity<Empresa>(entity =>
             {
                 entity.HasKey(e => e.IdEmpresa)
@@ -48,11 +127,6 @@ namespace Infrastructure.Data
                 entity.ToTable("Empresa");
 
                 entity.Property(e => e.IdEmpresa).ValueGeneratedNever();
-
-                entity.Property(e => e.Tadministrador)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .HasColumnName("TAdministrador");
 
                 entity.Property(e => e.Tdireccion)
                     .IsRequired()
@@ -74,47 +148,6 @@ namespace Infrastructure.Data
                     .HasForeignKey<Empresa>(d => d.IdEmpresa)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Empresa_Usuario");
-            });
-
-            modelBuilder.Entity<Ingeniero>(entity =>
-            {
-                entity.HasKey(e => e.IdIngeniero)
-                    .HasName("Ingeniero_pk");
-
-                entity.ToTable("Ingeniero");
-
-                entity.Property(e => e.IdIngeniero).ValueGeneratedNever();
-
-                entity.Property(e => e.Tdireccion)
-                    .IsRequired()
-                    .HasMaxLength(150)
-                    .HasColumnName("TDireccion");
-
-                entity.Property(e => e.Tdni)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .HasColumnName("TDNI");
-
-                entity.Property(e => e.Testado)
-                    .HasMaxLength(1)
-                    .HasColumnName("TEstado");
-
-                entity.Property(e => e.Tnombre)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .HasColumnName("TNombre");
-
-                entity.HasOne(d => d.IdEmpresaNavigation)
-                    .WithMany(p => p.Ingenieros)
-                    .HasForeignKey(d => d.IdEmpresa)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Ingeniero_Empresa");
-
-                entity.HasOne(d => d.IdIngenieroNavigation)
-                    .WithOne(p => p.Ingeniero)
-                    .HasForeignKey<Ingeniero>(d => d.IdIngeniero)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Ingeniero_Usuario");
             });
 
             modelBuilder.Entity<Mantenimiento>(entity =>
@@ -215,42 +248,6 @@ namespace Infrastructure.Data
                     .HasForeignKey(d => d.IdMantenimiento)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Reporte_Mantenimiento");
-            });
-
-            modelBuilder.Entity<Sanatorio>(entity =>
-            {
-                entity.HasKey(e => e.IdSanatorio)
-                    .HasName("Sanatorio_pk");
-
-                entity.ToTable("Sanatorio");
-
-                entity.Property(e => e.IdSanatorio).ValueGeneratedNever();
-
-                entity.Property(e => e.Tdireccion)
-                    .IsRequired()
-                    .HasMaxLength(150)
-                    .HasColumnName("TDireccion");
-
-                entity.Property(e => e.Tencargado)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .HasColumnName("TEncargado");
-
-                entity.Property(e => e.TrazonSocial)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .HasColumnName("TRazonSocial");
-
-                entity.Property(e => e.Truc)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .HasColumnName("TRUC");
-
-                entity.HasOne(d => d.IdSanatorioNavigation)
-                    .WithOne(p => p.Sanatorio)
-                    .HasForeignKey<Sanatorio>(d => d.IdSanatorio)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Sanatorio_Usuario");
             });
 
             modelBuilder.Entity<Solicitud>(entity =>

@@ -21,15 +21,15 @@ namespace Business.MainModule
                 Tpassword = psw
             };
             ctx.Usuarios.Add(objUsuario);
-            var objSanatorio = new Sanatorio
+            var objCentroSalud = new CentroSalud
             {
-                IdSanatorioNavigation=objUsuario,
+                IdCentroSaludNavigation=objUsuario,
                 Tencargado=Encargado,
                 Tdireccion=Direccion,
                 TrazonSocial=RazonSocial,
                 Truc=RUC
             };
-            ctx.Sanatorios.Add(objSanatorio);
+            ctx.CentroSaluds.Add(objCentroSalud);
             ctx.SaveChanges();
             return true;
         }           

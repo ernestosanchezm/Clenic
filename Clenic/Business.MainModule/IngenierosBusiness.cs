@@ -19,12 +19,12 @@ namespace Business.MainModule
         public bool CambiarEstadoIngeniero(int idingeniero,string estado)
         {
             try {
-                var objIngeniero = ctx.Ingenieros.SingleOrDefault(e => e.IdIngeniero == idingeniero);
+                var objIngeniero = ctx.Colaboradors.SingleOrDefault(e => e.IdColaborador == idingeniero);
                 if (objIngeniero is null) return false;
                 else
                 {
                     objIngeniero.Testado = estado;
-                    ctx.Ingenieros.Update(objIngeniero);
+                    ctx.Colaboradors.Update(objIngeniero);
                     ctx.SaveChanges();
                     return true;
                 }
@@ -44,16 +44,16 @@ namespace Business.MainModule
                     Tpassword = psw
                 };
                 ctx.Usuarios.Add(objUsuario);
-                var objIngeniero = new Ingeniero
+                var objIngeniero = new Colaborador
                 {
-                    IdIngenieroNavigation = objUsuario,
+                    IdColaboradorNavigation = objUsuario,
                     Tdireccion = Direccion,
                     Tdni = dni,
                     Tnombre = nombre,
                     IdEmpresa = idempresa,
                     Testado=Constantes.ESTADO_INGENIERO_ACTIVO
                 };
-                ctx.Ingenieros.Add(objIngeniero);
+                ctx.Colaboradors.Add(objIngeniero);
                 ctx.SaveChanges();
                 return true;
             } catch{
@@ -62,33 +62,33 @@ namespace Business.MainModule
          
         }
 
-        public List<IngenieroDTO> ListarIngenierosActivosXEmpresa(int idempresa)
+        public List<ColaboradorDTO> ListarIngenierosActivosXEmpresa(int idempresa)
         {
-            var listIngenieros = ctx.Ingenieros
+            var listIngenieros = ctx.Colaboradors
                                 .Where(e=>e.IdEmpresa==idempresa)
-                                .Select(e => new IngenieroDTO{
+                                .Select(e => new ColaboradorDTO{
                                     Dni=e.Tdni,
                                     EstadoIngeniero=e.Testado,
                                     IdEmpresa=e.IdEmpresa,
-                                    IdIngeniero=e.IdIngeniero,
+                                    IdIngeniero=e.IdColaborador,
                                     NIngeniero=e.Tnombre,
                                     TDireccion=e.Tdireccion
                                 })
                                 .ToList();
             return listIngenieros;
         }
-        public IngenieroDTO DetalleIngeniero(int idingeniero)
+        public ColaboradorDTO DetalleIngeniero(int idingeniero)
         {
             try {
-                var e = ctx.Ingenieros
-                                  .FirstOrDefault(e => e.IdIngeniero == idingeniero);
+                var e = ctx.Colaboradors
+                                  .FirstOrDefault(e => e.IdColaborador == idingeniero);
 
-                return new IngenieroDTO
+                return new ColaboradorDTO
                 {
                     Dni = e.Tdni,
                     EstadoIngeniero = e.Testado,
                     IdEmpresa = e.IdEmpresa,
-                    IdIngeniero = e.IdIngeniero,
+                    IdIngeniero = e.IdColaborador,
                     NIngeniero = e.Tnombre,
                     TDireccion = e.Tdireccion
                 };

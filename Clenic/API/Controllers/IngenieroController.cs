@@ -38,7 +38,7 @@ namespace MyE.API.Controllers
 
         [HttpPost]
         [Route("detalleingeniero")]
-        public IngenieroDTO DetalleIngeniero(int idingeniero)
+        public ColaboradorDTO DetalleIngeniero(int idingeniero)
         {
             try {
                 return ingenieroBusiness.DetalleIngeniero(idingeniero);
@@ -49,7 +49,7 @@ namespace MyE.API.Controllers
 
         [HttpGet]
         [Route("listaringenierosactivosxempresa")]
-        public List<IngenieroDTO> ListarIngenierosActivosXEmpresa(int idempresa)
+        public List<ColaboradorDTO> ListarIngenierosActivosXEmpresa(int idempresa)
         {
             try
             {

@@ -1,0 +1,498 @@
+﻿@{
+    var controller = Context.Request.RouteValues["Controller"] as string;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Auditorías">
+    <meta name="author" content="DAMER">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/img/favicon.png">
+    <title>@ViewData["Title"] - Babel Admin</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/plugins/wizard/steps.css" rel="stylesheet">
+
+    <!-- page CSS -->
+    <link href="~/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/switchery/dist/switchery.min.css" rel="stylesheet" />
+    <link href="~/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="~/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" rel="stylesheet" />
+    <link href="~/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+    <link href="~/plugins/multiselect/css/multi-select.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/tablesaw-master/dist/tablesaw.css" rel="stylesheet">
+    @*<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />*@
+    
+    @*<link href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">*@
+
+    <link rel="stylesheet" type="text/css" href="/css/demos.css" />
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600,400' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+
+    @*<link href="css/colors/blue.css" id="theme" rel="stylesheet">*@
+
+    <!-- Custom CSS -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- You can change the theme colors from here -->
+    <link href="~/css/black.css" id="theme" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="~/plugins/dropify/css/dropify.min.css" rel="stylesheet" />
+
+
+
+    <style>
+
+        .pagination {
+            justify-content: center;
+        }
+    </style>
+
+    @RenderSection("Styles", false)
+</head>
+
+<body class="fix-header card-no-border">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                        <!-- Logo icon -->
+                        <b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="~/img/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo icon -->
+                            <img src="~/img/logo-light-icon.png" alt="homepage" class="light-logo" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span>
+                            <!-- dark Logo text -->
+                            <img src="~/img/logo-text.png" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo text -->
+                            <img src="~/img/logo-light-text.png" class="light-logo" alt="homepage" />
+                        </span>
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto mt-md-0">
+                        <!-- This is  -->
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+
+                        <li class="nav-small-cap">ADMINISTRACIÓN</li>
+                        <li section="HOME-DASHBOARD">
+                            <a class="waves-effect waves-dark" href="@Url.Action("Dashboard", "Home")" aria-expanded="false">
+                                <i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard </span>
+                            </a>
+                        </li>
+                        <li section="USUARIOS-INDEX">
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index", "Usuario")" aria-expanded="false">
+                                <i class="mdi mdi-account-circle"></i><span class="hide-menu">Usuarios </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="waves-effect waves-dark" href="@Url.Action("Logout", "Home")" aria-expanded="false">
+                                <i class="mdi mdi-exit-to-app"></i><span class="hide-menu">Cerrar sesión </span>
+                            </a>
+                        </li>
+                        <li class="nav-devider"></li>
+
+                        <li class="nav-small-cap">MANTENIMIENTOS</li>
+                        <li section="ZONAS-INDEX">
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="mdi mdi-account-edit"></i>
+                                <span class="hide-menu">Zonas</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li section="ZONAS-INDEX"><a href="@Url.Action("Index", "Zona")">Zonas</a></li>
+                                <li section="ZONAS-DISTRITO"><a href="@Url.Action("Index", "ZonaDistrito")">Zona-Distrito</a></li>
+                            </ul>
+                        </li>
+                        <li section="SKUS-INDEX">
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="mdi mdi-account-edit"></i>
+                                <span class="hide-menu">Skus</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li section="FABRICANTES-INDEX"><a href="@Url.Action("Index", "Fabricante")">Fabricantes</a></li>
+                                <li section="AUDITORES-DISTRITO"><a href="@Url.Action("Index", "Marca")">Marca</a></li>
+                                <li section="AUDITORES-DISTRITO"><a href="@Url.Action("Index", "Categoria")">Categorias</a></li>
+                                <li section="AUDITORES-DISTRITO"><a href="@Url.Action("Index", "Sku")">Skus</a></li>
+                            </ul>
+                        </li>
+                        @*<li section="FABRICANTES-INDEX">
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index", "Fabricante")" aria-expanded="false">
+                                <i class="mdi mdi-wrench"></i><span class="hide-menu">Fabricantes </span>
+                            </a>
+                        </li>*@
+                        @*<li section="CATEGORIA-INDEX">
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index", "Categoria")" aria-expanded="false">
+                                <i class="mdi mdi-tag-multiple"></i><span class="hide-menu">Categoria </span>
+                            </a>
+                        </li>
+                        <li section="SKU-INDEX">
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index", "Sku")" aria-expanded="false">
+                                <i class="mdi mdi-barcode-scan"></i><span class="hide-menu">SKU </span>
+                            </a>
+                        </li>*@
+                        <li section="CANAL-INDEX">
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index", "Canal")" aria-expanded="false">
+                                <i class="mdi mdi-briefcase"></i><span class="hide-menu">Canal </span>
+                            </a>
+                        </li>
+                        <li section="PUNTOVENTA-INDEX">
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index", "PuntoVenta")" aria-expanded="false">
+                                <i class="mdi mdi-map"></i><span class="hide-menu">Punto Venta </span>
+                            </a>
+                        </li>
+                        <li section="AUDITORES-INDEX">
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="mdi mdi-account-edit"></i>
+                                <span class="hide-menu">Auditores</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li section="AUDITORES-INDEX"><a href="@Url.Action("Index", "Auditor")">Auditores</a></li>
+                                <li section="AUDITORES-DISTRITO"><a href="@Url.Action("Index", "AuditorDistrito")">Auditor-Distrito</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-devider"></li>
+
+                        <li class="nav-small-cap">AUDITORÍAS</li>
+
+                        <li section="CONTRATO-INDEX">
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="mdi mdi-account-edit"></i>
+                                <span class="hide-menu">Contratos</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li section="REGISTRO_CONTRATO"><a href="@Url.Action("Index", "Contrato")">Registro de contrato</a></li>
+                                <li section="MEDICION_CONTRATO"><a href="@Url.Action("Index", "ContratoMedicion")">Mediciones de contratos</a></li>
+                                <li section="MUESTRA"><a href="@Url.Action("Index", "Muestra")">Muestras</a></li>
+                                @*<li section="ZONAS-DISTRITO"><a href="@Url.Action("Index", "ZonaDistrito")">Zona-Distrito</a></li>*@
+                            </ul>
+                        </li>
+                        @*<li section="PLANIFICACION-INDEX">
+            <a class="waves-effect waves-dark" href="@Url.Action("Index", "Planificacion")" aria-expanded="false">
+                <i class="mdi mdi-calendar-today"></i><span class="hide-menu">Planificación </span>
+            </a>
+        </li>*@
+                        <li section="PLANIFICACION-INDEX">
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="mdi mdi-calendar-today"></i>
+                                <span class="hide-menu">Planificacion.</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li section="PLANIF_ADDEDIT1"><a href="@Url.Action("AddEdit1", "Planificacion")">Agregar Planificación</a></li>
+                                @*<li section="DELETE_PLANIF-INDEX"><a href="@Url.Action("Index", "Planificacion")">Eliminar Planificación</a></li>*@
+                            </ul>
+                        </li>
+                        <li section="ENCUESTAS-INDEX">
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index", "Encuesta")" aria-expanded="false">
+                                <i class="mdi mdi-poll"></i><span class="hide-menu">Encuestas </span>
+                            </a>
+                        </li>
+                        <li section="DATA_SIN_VALIDAR-INDEX">
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <i class="mdi mdi-account-edit"></i>
+                                <span class="hide-menu">Nueva Data</span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li section="SKU-NUEVOS"><a href="@Url.Action("NewSkus", "Sku")">Nuevos Skus</a></li>
+                                <li section="PUNTOSVENTA-INDEX"><a href="@Url.Action("NewPuntosVenta", "PuntoVenta")">Nuevos Puntos de venta</a></li>
+                                @*<li section="ZONAS-DISTRITO"><a href="@Url.Action("Index", "ZonaDistrito")">Zona-Distrito</a></li>*@
+                            </ul>
+                        </li>
+                        <li section="TRANSFERIRENCUESTAS-INDEX">
+                            <a class="waves-effect waves-dark" href="@Url.Action("TransferirEncuestasIndex", "Encuesta")" aria-expanded="false">
+                                <i class="mdi mdi-poll"></i><span class="hide-menu">Transferir Encuestas </span>
+                            </a>
+                        </li>
+                        <li section="CIERRE-INDEX">
+                            <a class="waves-effect waves-dark" href="@Url.Action("Index", "Cierre")" aria-expanded="false">
+                                <i class="mdi mdi-poll"></i><span class="hide-menu">Cierre</span>
+                            </a>
+                        </li>
+                        <li class="nav-devider"></li>
+
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <div class="row page-titles">
+                    <div class="col-md-5 col-8 align-self-center">
+                        <h3 class="text-themecolor m-b-0 m-t-0">@ViewData["Title"]</h3>
+                        @Html.Raw(ViewData["Breadcrumb"])
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                @RenderBody()
+                <!-- ============================================================== -->
+                <!-- End Page Content -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    <script src="~/js/jquery-3.5.1.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="~/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="~/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="~/plugins/sticky-kit/sticky-kit.min.js"></script>
+    <script src="~/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="~/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+    <!-- jQuery Validation -->
+    <script src="~/plugins/jquery-validation/jquery.validate.js"></script>
+    <script src="~/plugins/jquery-validation/additional-methods.js"></script>
+    <script src="~/plugins/jquery-validation/localization/messages_es_PE.js"></script>
+    <script>
+        function initValidator(e) {
+            $(e).validate({
+                errorClass: 'text-danger',
+                errorElement: 'small',
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element);
+                }
+            });
+        }
+        $(document).ready(function () { $('.validate').each(function (i, e) { initValidator(e); }); });
+    </script>
+
+    <!-- Swal -->
+    @*<script src="~/js/promise-polyfill.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script>
+        function swalShowLoading() { Swal.showLoading(); }
+        function swalShowError() {
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: 'Ocurrió un error desconocido.'
+            });
+        }
+    </script>
+
+    <!-- Dropify -->
+    <script src="~/plugins/dropify/js/dropify.min.js"></script>
+    <script>
+        $('.dropify').dropify({
+            messages: {
+                'default': '',
+                'replace': 'Arrastra y suelta o haz click para reemplazar',
+                'remove': 'Eliminar',
+                'error': 'Ocurrió un error. Por favor, intente nuevamente.'
+            },
+            error: {
+                'fileSize': 'El archivo es muy grande ({{ value }} como máximo).',
+                'minWidth': 'El ancho de la imagen es demasiado pequeño ({{ value }}px como mínimo).',
+                'maxWidth': 'El ancho de la imagen es demasiado grande ({{ value }}px como máximo).',
+                'minHeight': 'La altura de la imagen es demasiado pequeña ({{ value }}px como mínimo).',
+                'maxHeight': 'La altura de la imagen es demasiado grande ({{ value }}px como máximo).',
+                'fileExtension': 'El tipo de archivo no es válido (solo se permiten: {{ value }}).'
+            }
+        });
+        function initDropify(id) {
+            $('#' + id).dropify({
+                messages: {
+                    'default': '',
+                    'replace': 'Arrastra y suelta o haz click para reemplazar',
+                    'remove': 'Eliminar',
+                    'error': 'Ocurrió un error. Por favor, intente nuevamente.'
+                },
+                error: {
+                    'fileSize': 'El archivo es muy grande ({{ value }} como máximo).',
+                    'minWidth': 'El ancho de la imagen es demasiado pequeño ({{ value }}px como mínimo).',
+                    'maxWidth': 'El ancho de la imagen es demasiado grande ({{ value }}px como máximo).',
+                    'minHeight': 'La altura de la imagen es demasiado pequeña ({{ value }}px como mínimo).',
+                    'maxHeight': 'La altura de la imagen es demasiado grande ({{ value }}px como máximo).',
+                    'fileExtension': 'El tipo de archivo no es válido (sólo se permiten: {{ value }}).'
+                }
+            });
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var section = '@(ViewData["Section"] ?? "")';
+            if (section !== '')
+                $('li[section="' + section + '"]').addClass('active');
+        });
+
+        $('.ajax-post').on('submit', function (e) {
+            e.preventDefault();
+            if ($(this).valid()) {
+                $.ajax({
+                    url: $(this).prop('action'),
+                    type: $(this).prop('method'),
+                    processData: false,
+                    contentType: false,
+                    data: new FormData($(this)[0]),
+                    beforeSend: function () { swalShowLoading(); },
+                    error: function () { swalShowError(); },
+                    success: function (data) {
+                        //console.log(typeof (data));
+                        console.log("DEFAULT!");
+                        Swal.fire({
+                            icon: data.icon,
+                            title: data.title,
+                            text: data.text,
+                            allowOutsideClick: false,
+                            allowEscapeKey: false
+                        }).then((result) => {
+                            if (result.value && data.icon !== 'error') {
+                                    location.href = '@Url.Action("Index", controller)';                               
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        $('.delete-entity').on('click', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Está seguro?',
+                text: "¡Esta acción es irreversible!",
+                icon: 'warning',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: '@controller/Delete?id=' + $(this).data('id'),
+                        type: 'GET',
+                        beforeSend: function () { swalShowLoading(); },
+                        error: function () { swalShowError(); },
+                        success: function (data) {
+                            Swal.fire({
+                                icon: data.icon,
+                                title: data.title,
+                                text: data.text,
+                                allowOutsideClick: false,
+                                allowEscapeKey: false
+                            }).then((result) => {
+                                if (result.value && data.icon !== 'error')
+                                    location.href = '@Url.Action("Index", controller)';
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    @RenderSection("Scripts", false)
+</body>
+</html>

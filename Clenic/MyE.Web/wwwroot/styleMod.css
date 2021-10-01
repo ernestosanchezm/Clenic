@@ -1,0 +1,40 @@
+﻿
+/*#tabla_planificacion table, th, td {
+    border: 1px solid black;
+}*/
+
+
+#tabla_planificacion th {
+    font-size: 13px;
+}
+
+#tabla_planificacion td {
+    font-size: 12px;
+    padding: 2px;
+    white-space: nowrap;
+}
+
+#tblCierrePlanif th {
+    font-size: 13px;
+}
+
+#tblCierrePlanif td {
+    font-size: 12px;
+    padding: 2px;
+    white-space: nowrap;
+}
+
+#tblCierrePlanifDistrito th {
+    font-size: 14px;
+}
+
+#tblCierrePlanifDistrito td {
+    font-size: 13px;
+    padding: 2px;
+    white-space: nowrap;
+}
+
+.no-spacing {
+    border-collapse: collapse;
+    border-spacing: 0;
+}

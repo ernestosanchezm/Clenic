@@ -21,7 +21,7 @@ namespace Domain.Entities
         public bool FincidenteDetectado { get; set; }
         public int IdSanatorio { get; set; }
 
-        public virtual Sanatorio IdSanatorioNavigation { get; set; }
+        public virtual CentroSalud IdSanatorioNavigation { get; set; }
         public virtual ICollection<Solicitud> Solicituds { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Domain.Entities
         public int IdIngeniero { get; set; }
         public string Testado { get; set; }
 
-        public virtual Ingeniero IdIngenieroNavigation { get; set; }
+        public virtual Colaborador IdIngenieroNavigation { get; set; }
         public virtual Solicitud IdSolicitudNavigation { get; set; }
         public virtual ICollection<Reporte> Reportes { get; set; }
     }

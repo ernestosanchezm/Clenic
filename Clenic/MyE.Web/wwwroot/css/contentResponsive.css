@@ -1,0 +1,15 @@
+﻿* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.container {
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh;
+background:#0094ff;
+font-family:'Nunito',sans-serif;
+padding: 0 20px;
+}

@@ -1,0 +1,206 @@
+﻿/*Spinner*/
+#overlay {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background: rgba(0,0,0,0.6);
+}
+
+.cv-spinner {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px #ddd solid;
+    border-top: 4px #2e93e6 solid;
+    border-radius: 50%;
+    animation: sp-anime 0.8s infinite linear;
+}
+
+@keyframes sp-anime {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.is-hide {
+    display: none;
+}
+/*End Spinner*/
+
+
+/*Botones*/
+#ulBtn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin: 0;
+    padding: 0;
+    /*display:flex;*/
+}
+
+    #ulBtn li {
+        list-style: none;
+        width: 60px;
+        height: 60px;
+        background: #262626;
+        margin: 10px 10px;
+        border-radius: 50%;
+        transition: .5s;
+        cursor: pointer;
+    }
+
+        /*Right*/
+        #ulBtn li.next:hover {
+            background: #0070ff;
+        }
+
+        #ulBtn li span {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 4px solid #fff;
+            transition: .5s;
+        }
+
+        #ulBtn li.next span {
+            top: 53%;
+            right: 15%;
+            transform: translate(-110%, -250%) rotate(-45deg);
+            border-left: none;
+            border-top: none;
+        }
+
+        #ulBtn li.next:hover span {
+            right: 11%;
+        }
+
+        #ulBtn li.next span:before {
+            content: '';
+            position: absolute;
+            width: 38px;
+            height: 4px;
+            background: #fff;
+            transform-origin: right;
+            transform: rotate(45deg) translate(-11px, 31px) scaleX(0);
+            transition: .5s;
+        }
+
+        #ulBtn li.next:hover span:before {
+            transform: rotate(45deg) translate(-11px, 31px) scaleX(1);
+        }
+
+        /*End Right*/
+
+
+        /*Left*/
+        #ulBtn li.prev:hover {
+            background: red;
+        }
+
+        #ulBtn li.prev span {
+            top: 47%;
+            left: 15%;
+            transform: translate(110%, 150%) rotate(-45deg);
+            border-right: none;
+            border-bottom: none;
+        }
+
+        #ulBtn li.prev:hover span {
+            left: 11%;
+        }
+
+        #ulBtn li.prev span:before {
+            content: '';
+            position: absolute;
+            width: 38px;
+            height: 4px;
+            background: #fff;
+            transform-origin: left;
+            transform: rotate(45deg) translate(-7px, 4px) scaleX(0);
+            transition: .5s;
+        }
+
+        #ulBtn li.prev:hover span:before {
+            transform: rotate(45deg) translate(-7px, 4px) scaleX(1);
+        }
+
+    /*End Left*/
+/*End Botones*/
+
+
+/*.checkDpto */
+/*.checkDpto {
+/*    /*width: 20px;*/
+/*    position: relative;
+/*    /*margin: 20px auto;*/
+/*}
+/*
+/*    .checkDpto label {
+/*        width: 16px;
+/*        height: 15px;
+/*        cursor: pointer;
+/*        position: absolute;
+/*        top: 0;
+/*        left: 0;
+/*        background: #fcfff4;
+/*        background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+/*        border-radius: 4px;
+/*        box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+/*    }
+/*
+/*        .checkDpto label:after {
+/*            content: '';
+/*            width: 9px;
+/*            height: 5px;
+/*            position: absolute;
+/*            top: 4px;
+/*            left: 4px;
+/*            border: 3px solid #333;
+/*            border-top: none;
+/*            border-right: none;
+/*            background: transparent;
+/*            opacity: 0;
+/*            -webkit-transform: rotate(-45deg);
+/*            transform: rotate(-45deg);
+/*        }
+/*
+/*        .checkDpto label:hover::after {
+/*            opacity: 0.5;
+/*        }
+/*
+/*    .checkDpto input[type=checkbox] {
+/*        visibility: hidden;
+/*    }
+/*
+/*        .checkDpto input[type=checkbox]:checked + label:after {
+/*            opacity: 1;
+/*        }
+/*
+/* end .checkDpto */
+
+
+/*ocultar #checkDpto para solo mostrar el checkbox VERDE*/
+#checkDpto {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+}
+/*end checkDpto*/
+
+
+/* Remove default checkbox */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: relative;
+  left: 0px;
+  opacity: 1; }

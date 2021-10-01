@@ -33,7 +33,7 @@ namespace Business.MainModule
             }     
         }
 
-        public List<SolicitudDTO> ListarSolicitudesPorEncargado(int idsanatorio)
+        public List<SolicitudDTO> ListarSolicitudesPorCentroSalud(int idsanatorio)
         {
             try {
                 var listarSolicitudes = ctx.Solicituds

@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +23,31 @@ namespace MyE.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews(options =>
+            //{
+            //    options.Filters.Add(typeof(AuthorizationFilter));
+            //})
+            //   .AddNewtonsoftJson(options =>
+            //   {
+            //       options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //       options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            //   })
+            //   ;
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+            });
+            // Add framework services.
+            services.AddMvc();
+
+        
+            services.AddAntiforgery(options =>
+            {
+                // Set Cookie properties using CookieBuilder properties�.
+                options.FormFieldName = "AntiforgeryTokenInput";
+                //options.HeaderName = "X-CSRF-TOKEN-BABEL-ADMIN";
+                options.SuppressXFrameOptionsHeader = false;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,8 +67,9 @@ namespace MyE.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

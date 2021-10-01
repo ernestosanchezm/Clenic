@@ -34,9 +34,7 @@ namespace MyE.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Login(LoginModel model)
-        {
-            var response = default(IActionResult);
-                        
+        {      
             try
             {
 
@@ -52,6 +50,7 @@ namespace MyE.Web.Controllers
                             ColaboradorLoginDTO=objColaborador,
                             Nameuser=model.Usuario  
                         })));
+                    return View();// RedirectToAction("Index", "Solicitudes", new { IdCentroSalud = objcentrosalud.IdCentroSalud });
                 }
 
                 if (idusuario_tipo.Item2 == Constantes.TIPO_USUARIO_CENTROSALUD)
@@ -64,21 +63,24 @@ namespace MyE.Web.Controllers
                             CentroSaludDTO = objcentrosalud,
                             Nameuser = model.Usuario,
                         })));
+                    return RedirectToAction("ListaSolicitudes", "Solicitudes", new { IdCentroSalud = objcentrosalud.IdCentroSalud });
                 }
-               
+
+                return base.SwalErrorResponse("Error de autenticacion", "Error de acceso");
+
             }
             catch (Exception ex)
             {
                 //model.Clave = null;
                 //base.AddLog(model, ex);
-                //response = base.SwalResponseError(ex);
+                return base.SwalErrorResponse("Error de autenticacion","Error de acceso");
             }
             finally
             {
                 //try { ctx.SaveChanges(); } catch { }
                 //try { ctx.Dispose(); } catch { }
             }
-            return response;
+          
         }
         public IActionResult Privacy()
         {
